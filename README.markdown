@@ -17,6 +17,6 @@ or integers
 
 or arbitrary Haskell expressions
 
-    >>> let profission = "\955-scientist"
-    >>> putStrLn [i|profission: #{unwords [name, "the", profission]}|]
-    profission: Marvin the λ-scientist
+    >>> let profession = "\955-scientist"
+    >>> putStrLn [i|profession: #{unwords [name, "the", profession]}|]
+    profession: Marvin the λ-scientist
