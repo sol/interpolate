@@ -2,11 +2,11 @@
 module Data.String.Interpolate (i) where
 
 import           Language.Haskell.TH.Quote (QuasiQuoter(..))
-import           Language.Haskell.TH (Q, Exp, appE, reportError)
 import           Language.Haskell.Meta.Parse.Careful (parseExp)
 
 import           Data.String.Interpolate.Util
 import           Data.String.Interpolate.Parse
+import           Data.String.Interpolate.Compat (Q, Exp, appE, reportError)
 
 i :: QuasiQuoter
 i = QuasiQuoter {

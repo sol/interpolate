@@ -1,3 +1,4 @@
+{-# LANGUAGE CPP #-}
 module Data.String.Interpolate.UtilSpec (main, spec) where
 
 import           Test.Hspec
@@ -38,7 +39,11 @@ spec = do
 
     context "when used with lazy ByteString" $ do
       it "behaves like `unpack`" $ do
-        property $ \xs -> toString xs `shouldBe` LB.unpack xs
+        property $ \xs -> do
+#if __GLASGOW_HASKELL__ < 706
+          pendingWith "Does not work with GHC < 7.6"
+#endif
+          toString xs `shouldBe` LB.unpack xs
 
   describe "unescape" $ do
     it "unescapes single-character escape codes" $ do

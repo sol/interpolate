@@ -2,11 +2,13 @@ module Data.String.Interpolate.Util where
 
 import           Data.Char
 import           Data.Maybe
-import           Text.Read
 import qualified Numeric as N
+
+import           Data.String.Interpolate.Compat
 
 toString :: Show a => a -> String
 toString a = let s = show a in fromMaybe s (readMaybe s)
+
 
 -- Haskell 2010 character unescaping, see:
 -- http://www.haskell.org/onlinereport/haskell2010/haskellch2.html#x7-200002.6
