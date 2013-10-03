@@ -21,7 +21,7 @@ import           Data.String.Interpolate.Compat (Q, Exp, appE, reportError)
 -- A `QuasiQuoter` for string interpolation.  Expression enclosed within
 -- @#{...}@ are interpolated, the result has to be in the `Show` class.
 --
--- Interpolates strings
+-- It interpolates strings
 --
 -- >>> let name = "Marvin"
 -- >>> putStrLn [i|name: #{name}|]
