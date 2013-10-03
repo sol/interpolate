@@ -1,26 +1,22 @@
-# String interpolation for Haskell done right
+# String interpolation done right
 
-Interpolates arbitrary Haskell expressions
+    >>> :set -XQuasiQuotes
+    >>> import Data.String.Interpolate
 
-```
->>> :set -XQuasiQuotes
->>> import Data.String.Interpolate
->>> let name = "foobar"
->>> let age = 23
->>> putStrLn [i|name: #{name}, age: #{age}|]
-name: foobar, age: 23
-```
+Interpolates strings
 
-and properly handles escape sequences in string literals
+    >>> let name = "Marvin"
+    >>> putStrLn [i|name: #{name}|]
+    name: Marvin
 
-```
->>> putStrLn [i|foo-\955-bar|]
-foo-λ-bar
-```
+or integers
 
-and in interpolated expressions
+    >>> let age = 23
+    >>> putStrLn [i|age: #{age}|]
+    age: 23
 
-```
->>> putStrLn [i|some #{unwords ["foo", "\955", "bar"]} test|]
-some foo λ bar test
-```
+or arbitrary Haskell expressions
+
+    >>> let profission = "\955-scientist"
+    >>> putStrLn [i|profission: #{unwords [name, "the", profission]}|]
+    profission: Marvin the λ-scientist
