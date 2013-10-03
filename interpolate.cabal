@@ -7,6 +7,14 @@ author:           Simon Hengel <sol@typeful.net>
 maintainer:       Simon Hengel <sol@typeful.net>
 build-type:       Simple
 cabal-version:    >= 1.8
+category:         Data, Text
+stability:        experimental
+synopsis:         String interpolation done right
+description:      String interpolation done right
+
+source-repository head
+  type: git
+  location: https://github.com/sol/interpolate
 
 library
   ghc-options:
@@ -15,8 +23,10 @@ library
       src
   exposed-modules:
       Data.String.Interpolate
+  other-modules:
       Data.String.Interpolate.Util
       Data.String.Interpolate.Parse
+      Data.String.Interpolate.Compat
   build-depends:
       base    == 4.*
     , template-haskell
