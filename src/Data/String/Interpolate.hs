@@ -1,5 +1,14 @@
 {-# LANGUAGE TemplateHaskell #-}
-module Data.String.Interpolate (i) where
+module Data.String.Interpolate (
+-- * String interpolation done right
+-- |
+-- The examples in this module use `QuasiQuotes`.  Make sure to enable the
+-- corresponding language extension.
+--
+-- >>> :set -XQuasiQuotes
+-- >>> import Data.String.Interpolate
+  i
+) where
 
 import           Language.Haskell.TH.Quote (QuasiQuoter(..))
 import           Language.Haskell.Meta.Parse.Careful (parseExp)
@@ -8,6 +17,27 @@ import           Data.String.Interpolate.Util
 import           Data.String.Interpolate.Parse
 import           Data.String.Interpolate.Compat (Q, Exp, appE, reportError)
 
+-- |
+-- A `QuasiQuoter` for string interpolation.  Expression enclosed within
+-- @#{...}@ are interpolated, the result has to be in the `Show` class.
+--
+-- Interpolates strings
+--
+-- >>> let name = "Marvin"
+-- >>> putStrLn [i|name: #{name}|]
+-- name: Marvin
+--
+-- or integers
+--
+-- >>> let age = 23
+-- >>> putStrLn [i|age: #{age}|]
+-- age: 23
+--
+-- or arbitrary Haskell expressions
+--
+-- >>> let profession = "\955-scientist"
+-- >>> putStrLn [i|profession: #{unwords [name, "the", profession]}|]
+-- profession: Marvin the λ-scientist
 i :: QuasiQuoter
 i = QuasiQuoter {
     quoteExp = toExp . parseNodes
