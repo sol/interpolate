@@ -1,4 +1,4 @@
-# String interpolation done right
+# String interpolation done right!
 
     >>> :set -XQuasiQuotes
     >>> import Data.String.Interpolate
