@@ -48,6 +48,6 @@ test-suite spec
 
     , text
     , bytestring
-    , hspec >= 1.3
+    , hspec >= 1.5
     , QuickCheck
     , quickcheck-instances
