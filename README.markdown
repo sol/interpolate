@@ -1,5 +1,10 @@
 # String interpolation done right!
 
+There is not much here yet.  But bellow is an example and links to other string
+interpolation libraries.
+
+## Example
+
     >>> :set -XQuasiQuotes
     >>> import Data.String.Interpolate
 
@@ -21,7 +26,7 @@ or arbitrary Haskell expressions
     >>> putStrLn [i|profession: #{unwords [name, "the", profession]}|]
     profession: Marvin the λ-scientist
 
-# Other string interpolation libraries for Haskell
+## Other string interpolation libraries for Haskell
 
 There are many other string interpolation libraries for Haskell, each with it's
 own set of limitations.  Here is a short list, a more thorough analysis will
