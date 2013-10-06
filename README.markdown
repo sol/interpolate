@@ -33,7 +33,8 @@ own set of limitations.  Here is a short list, a more thorough analysis will
 follow.
 
  * [interpolatedstring-qq](http://hackage.haskell.org/package/interpolatedstring-qq)
-   (insterpolating `String` and `Text` does not really work)
+   (insterpolating `String` and `Text` does not really work, try e.g. strings
+   that contain unicode)
  * [interpolatedstring-perl6](http://hackage.haskell.org/package/interpolatedstring-perl6)
    (uses `IncoherentInstances`)
 
