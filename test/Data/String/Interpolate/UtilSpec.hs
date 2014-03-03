@@ -19,31 +19,31 @@ spec :: Spec
 spec = do
   describe "toString" $ do
     it "behaves like `show`" $ do
-      property $ \n -> toString (n :: Int) `shouldBe` (show n)
+      property $ \n -> toString (n :: Int) `shouldBe` show n
 
     context "when used with String" $ do
       it "behaves like `id`" $ do
-        property $ \xs -> toString xs `shouldBe` xs
+        property $ \s -> toString s `shouldBe` s
 
     context "when used with Text" $ do
       it "behaves like `unpack`" $ do
-        property $ \xs -> toString xs `shouldBe` T.unpack xs
+        property $ \s -> toString s `shouldBe` T.unpack s
 
     context "when used with lazy Text" $ do
       it "behaves like `unpack`" $ do
-        property $ \xs -> toString xs `shouldBe` LT.unpack xs
+        property $ \s -> toString s `shouldBe` LT.unpack s
 
     context "when used with ByteString" $ do
       it "behaves like `unpack`" $ do
-        property $ \xs -> toString xs `shouldBe` B.unpack xs
+        property $ \s -> toString s `shouldBe` B.unpack s
 
     context "when used with lazy ByteString" $ do
       it "behaves like `unpack`" $ do
-        property $ \xs -> do
+        property $ \s -> do
 #if __GLASGOW_HASKELL__ < 706
           pendingWith "Does not work with GHC < 7.6"
 #endif
-          toString xs `shouldBe` LB.unpack xs
+          toString s `shouldBe` LB.unpack s
 
   describe "unescape" $ do
     it "unescapes single-character escape codes" $ do
