@@ -12,8 +12,8 @@ parseNodes = go ""
       ""  -> [(lit . reverse) acc]
       '#':'{':xs -> case span (/= '}') xs of
         (ys, _:zs) -> (lit . reverse) acc : Expression ys : go "" zs
-        (_, "") -> [(Literal . unescape) (reverse acc ++ input)]
+        (_, "") -> [lit (reverse acc ++ input)]
       x:xs -> go (x:acc) xs
 
     lit :: String -> Node
-    lit acc = (Literal . unescape) acc
+    lit = Literal . unescape
