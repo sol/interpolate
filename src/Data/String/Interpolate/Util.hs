@@ -28,6 +28,7 @@ unescape = go
       '\\' : x : xs | isDigit x -> case span isDigit xs of
         (ys, zs) -> (chr . read $ x:ys) : go zs
       '\\' : input_ -> case input_ of
+        '\\' : xs -> '\\' : go xs
         'a' : xs -> '\a' : go xs
         'b' : xs -> '\b' : go xs
         'f' : xs -> '\f' : go xs

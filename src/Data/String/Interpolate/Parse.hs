@@ -7,6 +7,7 @@ data Node = Literal String | Expression String
 parseNodes :: String -> [Node]
 parseNodes = go ""
   where
+    go :: String -> String -> [Node]
     go acc input = case input of
       ""  -> [(lit . reverse) acc]
       '#':'{':xs -> case span (/= '}') xs of
