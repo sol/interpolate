@@ -10,6 +10,7 @@ parseNodes = go ""
     go :: String -> String -> [Node]
     go acc input = case input of
       ""  -> [(lit . reverse) acc]
+      '\\':x:xs -> go (x:'\\':acc) xs
       '#':'{':xs -> case span (/= '}') xs of
         (ys, _:zs) -> (lit . reverse) acc : Expression ys : go "" zs
         (_, "") -> [lit (reverse acc ++ input)]

@@ -26,3 +26,9 @@ spec = do
 
     it "dose not strip backslashes (issue #1)" $ do
       [i|foo\\bar|] `shouldBe` "foo\\bar"
+
+    it "allows to prevent interpolation by escaping the hash with a backslash" $ do
+      [i|foo \#{23 :: Int} bar|] `shouldBe` "foo #{23 :: Int} bar"
+
+    it "does not prevent interpolation on literal backslash" $ do
+      [i|foo \\#{23 :: Int} bar|] `shouldBe` "foo \\23 bar"
