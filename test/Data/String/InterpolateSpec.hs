@@ -32,3 +32,36 @@ spec = do
 
     it "does not prevent interpolation on literal backslash" $ do
       [i|foo \\#{23 :: Int} bar|] `shouldBe` "foo \\23 bar"
+
+  describe "unindent" $ do
+    it "is total" $ do
+      property $ \xs -> length (unindent xs) >= 0
+
+    it "removes indentation" $ do
+      let xs = "    foo\n  bar\n   baz  \n"
+      unindent xs `shouldBe` "  foo\nbar\n baz  \n"
+
+    it "removes the first line of the string if it is empty" $ do
+      let xs = "  foo\nbar\n baz\n"
+      unindent ("\n" ++ xs) `shouldBe` xs
+
+    it "empties the last line if it only consists of whitespace" $ do
+      let xs = "foo\n  "
+      unindent xs `shouldBe` "foo\n"
+
+    it "does not affect whitespace lines at the beginning" $ do
+      unindent "  \n  \nfoo" `shouldBe` "  \n  \nfoo"
+
+    it "does not affect other whitespace lines at the end" $ do
+      unindent "foo\n  \n  " `shouldBe` "foo\n  \n"
+
+    it "disregards empty lines when calculating indentation" $ do
+      let xs = "  foo\n\n \n  bar\n"
+      unindent xs `shouldBe` "foo\n\n\nbar\n"
+
+    it "correctly handles strings that do not end with a newline" $ do
+      let xs = "foo"
+      unindent xs `shouldBe` xs
+
+    it "does not affect lines consisting of whitespace (apart from unindenting)" $ do
+      unindent " foo\n  \n bar" `shouldBe` "foo\n \nbar"
