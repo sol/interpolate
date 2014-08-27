@@ -23,6 +23,7 @@ library
       src
   exposed-modules:
       Data.String.Interpolate
+      Data.String.Interpolate.IsString
   other-modules:
       Data.String.Interpolate.Util
       Data.String.Interpolate.Parse
@@ -36,7 +37,7 @@ test-suite spec
   type:
       exitcode-stdio-1.0
   ghc-options:
-      -Wall -Werror
+      -Wall
   hs-source-dirs:
       src, test
   main-is:
@@ -56,7 +57,7 @@ test-suite doctests
   type:
       exitcode-stdio-1.0
   ghc-options:
-      -Wall -Werror
+      -Wall
   hs-source-dirs:
       test
   main-is:
