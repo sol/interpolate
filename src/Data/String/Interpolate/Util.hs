@@ -8,6 +8,7 @@ import           Data.String.Interpolate.Compat
 
 toString :: Show a => a -> String
 toString a = let s = show a in fromMaybe s (readMaybe s)
+{-# NOINLINE toString #-}
 {-# RULES "toString/String" toString = id #-}
 {-# RULES "toString/Int" toString = show :: Int -> String #-}
 {-# RULES "toString/Integer" toString = show :: Integer -> String #-}
