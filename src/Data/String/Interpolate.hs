@@ -69,8 +69,11 @@ i = QuasiQuoter {
 -- | Remove indentation as much as possible while preserving relative
 -- indentation levels.
 --
--- `unindent` is meant to be used in combination with `i` to allow you to indent
--- your code without affecting your string literals.  Here is an example:
+-- `unindent` is useful in combination with `i` to remove leading spaces that
+-- resulted from code indentation.  That way you can freely indent your string
+-- literals without the indentation ending up in the resulting strings.
+--
+-- Here is an example:
 --
 -- >>> :{
 --  putStr $ unindent [i|
@@ -87,14 +90,14 @@ i = QuasiQuoter {
 -- indentation:
 --
 -- - One empty line at the beginning will be removed and
--- - if the last line consists only of whitespace, it will be trimmed to @"\\n"@.
+-- - if the last newline character (@"\\n"@) is followed by spaces, the spaces are removed.
 unindent :: String -> String
-unindent input =
-    (lines_ >>>
-     removeLeadingEmptyLine >>>
-     trimLastLine >>>
-     removeIndentation >>>
-     concat) input
+unindent =
+      lines_
+  >>> removeLeadingEmptyLine
+  >>> trimLastLine
+  >>> removeIndentation
+  >>> concat
   where
     isEmptyLine :: String -> Bool
     isEmptyLine = all isSpace
@@ -106,8 +109,9 @@ unindent input =
       (first, rest) -> first : lines_ rest
 
     removeLeadingEmptyLine :: [String] -> [String]
-    removeLeadingEmptyLine ("\n" : r) = r
-    removeLeadingEmptyLine l = l
+    removeLeadingEmptyLine xs = case xs of
+      y:ys | isEmptyLine y -> ys
+      _ -> xs
 
     trimLastLine :: [String] -> [String]
     trimLastLine (a : b : r) = a : trimLastLine (b : r)
@@ -124,7 +128,12 @@ unindent input =
         dropSpaces _ s = s
         indentation = minimalIndentation ys
         minimalIndentation =
-            minimum
+            safeMinimum 0
           . map (length . takeWhile (== ' '))
           . removeEmptyLines
         removeEmptyLines = filter (not . isEmptyLine)
+
+        safeMinimum :: Ord a => a -> [a] -> a
+        safeMinimum x xs = case xs of
+          [] -> x
+          _ -> minimum xs
