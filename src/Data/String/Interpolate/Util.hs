@@ -6,12 +6,15 @@ import           Data.Char
 -- | Remove indentation as much as possible while preserving relative
 -- indentation levels.
 --
--- `unindent` is useful in combination with `i` to remove leading spaces that
+-- `unindent` is useful in combination with `Data.String.Interpolate.i` to remove leading spaces that
 -- resulted from code indentation.  That way you can freely indent your string
 -- literals without the indentation ending up in the resulting strings.
 --
 -- Here is an example:
 --
+-- >>> :set -XQuasiQuotes
+-- >>> import Data.String.Interpolate
+-- >>> import Data.String.Interpolate.Util
 -- >>> :{
 --  putStr $ unindent [i|
 --      def foo

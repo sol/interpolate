@@ -24,6 +24,7 @@ library
   exposed-modules:
       Data.String.Interpolate
       Data.String.Interpolate.IsString
+      Data.String.Interpolate.Util
   other-modules:
       Data.String.Interpolate.Internal.Util
       Data.String.Interpolate.Parse
