@@ -25,7 +25,7 @@ library
       Data.String.Interpolate
       Data.String.Interpolate.IsString
   other-modules:
-      Data.String.Interpolate.Util
+      Data.String.Interpolate.Internal.Util
       Data.String.Interpolate.Parse
       Data.String.Interpolate.Compat
   build-depends:

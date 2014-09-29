@@ -1,5 +1,5 @@
 {-# LANGUAGE CPP #-}
-module Data.String.Interpolate.UtilSpec (main, spec) where
+module Data.String.Interpolate.Internal.UtilSpec where
 
 import           Test.Hspec
 import           Test.QuickCheck
@@ -10,7 +10,7 @@ import qualified Data.Text.Lazy as LT
 import qualified Data.ByteString.Char8 as B
 import qualified Data.ByteString.Lazy.Char8 as LB
 
-import           Data.String.Interpolate.Util
+import           Data.String.Interpolate.Internal.Util
 
 main :: IO ()
 main = hspec spec

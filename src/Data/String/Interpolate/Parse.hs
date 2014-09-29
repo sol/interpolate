@@ -1,6 +1,6 @@
 module Data.String.Interpolate.Parse where
 
-import           Data.String.Interpolate.Util
+import           Data.String.Interpolate.Internal.Util
 
 data Node = Literal String | Expression String
 

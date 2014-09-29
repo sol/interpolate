@@ -1,4 +1,4 @@
-module Data.String.Interpolate.Util where
+module Data.String.Interpolate.Internal.Util where
 
 import           Data.Char
 import           Data.Maybe
