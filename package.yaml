@@ -1,0 +1,38 @@
+name: interpolate
+version: 0.1.0
+category: Data, Text
+stability: experimental
+synopsis: String interpolation done right
+description: String interpolation done right
+license: MIT
+copyright: (c) 2013-2015 Simon Hengel
+author: Simon Hengel <sol@typeful.net>
+maintainer: Simon Hengel <sol@typeful.net>
+
+github: sol/interpolate
+
+ghc-options: -Wall
+
+dependencies:
+  - base == 4.*
+  - template-haskell
+  - haskell-src-meta
+
+source-dirs: src
+
+library:
+  exposed-modules:
+    - Data.String.Interpolate
+    - Data.String.Interpolate.IsString
+    - Data.String.Interpolate.Util
+
+tests:
+  spec:
+    source-dirs: test
+    main: Spec.hs
+    dependencies:
+      - text
+      - bytestring
+      - hspec >= 1.5
+      - QuickCheck
+      - quickcheck-instances
