@@ -17,6 +17,8 @@ import           Data.String.Interpolate.Internal.Util
 import           Data.String.Interpolate.Parse
 import           Data.String.Interpolate.Compat (Q, Exp, appE, reportError)
 
+import           Language.Haskell.Expression
+
 -- |
 -- A `QuasiQuoter` for string interpolation.  Expression enclosed within
 -- @#{...}@ are interpolated, the result has to be in the `Show` class.
@@ -57,8 +59,8 @@ i = QuasiQuoter {
         f (Expression e) = [|(showString . toString) $(reifyExpression e)|]
 
         reifyExpression :: String -> Q Exp
-        reifyExpression s = case parseExp s of
+        reifyExpression s = case parseExpression s of
           Left _ -> do
             reportError "Parse error in expression!"
             [|""|]
-          Right e -> return e
+          Right e -> return (toTH e)
