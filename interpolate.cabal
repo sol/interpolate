@@ -3,7 +3,7 @@
 -- see: https://github.com/sol/hpack
 
 name:             interpolate
-version:          0.1.0
+version:          0.1.1
 homepage:         https://github.com/sol/interpolate#readme
 bug-reports:      https://github.com/sol/interpolate/issues
 license:          MIT
