@@ -1,4 +1,4 @@
--- This file has been generated from package.yaml by hpack version 0.1.2.
+-- This file has been generated from package.yaml by hpack version 0.17.0.
 --
 -- see: https://github.com/sol/hpack
 
@@ -23,7 +23,8 @@ source-repository head
   location: https://github.com/sol/interpolate
 
 library
-  hs-source-dirs: src
+  hs-source-dirs:
+      src
   exposed-modules:
       Data.String.Interpolate
       Data.String.Interpolate.IsString
@@ -32,24 +33,27 @@ library
       Data.String.Interpolate.Compat
       Data.String.Interpolate.Internal.Util
       Data.String.Interpolate.Parse
+      Paths_interpolate
   build-depends:
       base == 4.*
     , template-haskell
-    , haskell-src-meta
+    , haskell-src-meta >= 0.8
   ghc-options: -Wall
   default-language: Haskell2010
 
 test-suite spec
   type: exitcode-stdio-1.0
-  hs-source-dirs: src, test
+  hs-source-dirs:
+      src
+      test
   main-is: Spec.hs
   other-modules:
+      Data.String.Interpolate
       Data.String.Interpolate.Compat
       Data.String.Interpolate.Internal.Util
       Data.String.Interpolate.IsString
       Data.String.Interpolate.Parse
       Data.String.Interpolate.Util
-      Data.String.Interpolate
       Data.String.Interpolate.Internal.UtilSpec
       Data.String.Interpolate.IsStringSpec
       Data.String.Interpolate.ParseSpec
@@ -58,8 +62,7 @@ test-suite spec
   build-depends:
       base == 4.*
     , template-haskell
-    , haskell-src-meta
-
+    , haskell-src-meta >= 0.8
     , text
     , bytestring
     , hspec >= 1.5

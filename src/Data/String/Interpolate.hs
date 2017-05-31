@@ -11,7 +11,7 @@ module Data.String.Interpolate (
 ) where
 
 import           Language.Haskell.TH.Quote (QuasiQuoter(..))
-import           Language.Haskell.Meta.Parse.Careful (parseExp)
+import           Language.Haskell.Meta.Parse (parseExp)
 
 import           Data.String.Interpolate.Internal.Util
 import           Data.String.Interpolate.Parse

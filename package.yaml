@@ -16,7 +16,7 @@ ghc-options: -Wall
 dependencies:
   - base == 4.*
   - template-haskell
-  - haskell-src-meta
+  - haskell-src-meta >= 0.8
 
 source-dirs: src
 
