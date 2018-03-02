@@ -1,6 +1,8 @@
--- This file has been generated from package.yaml by hpack version 0.17.0.
+-- This file has been generated from package.yaml by hpack version 0.26.0.
 --
 -- see: https://github.com/sol/hpack
+--
+-- hash: 6c7365c22776e3daf2887c40126dcf84616d45fa45a9386166f053b556a84fb1
 
 name:             interpolate
 version:          0.1.1
@@ -35,9 +37,9 @@ library
       Data.String.Interpolate.Parse
       Paths_interpolate
   build-depends:
-      base == 4.*
+      base ==4.*
+    , haskell-src-meta >=0.8
     , template-haskell
-    , haskell-src-meta >= 0.8
   ghc-options: -Wall
   default-language: Haskell2010
 
@@ -59,14 +61,16 @@ test-suite spec
       Data.String.Interpolate.ParseSpec
       Data.String.Interpolate.UtilSpec
       Data.String.InterpolateSpec
+      Paths_interpolate
   build-depends:
-      base == 4.*
-    , template-haskell
-    , haskell-src-meta >= 0.8
-    , text
+      QuickCheck
+    , base ==4.*
+    , base-compat
     , bytestring
-    , hspec >= 1.5
-    , QuickCheck
+    , haskell-src-meta >=0.8
+    , hspec >=1.5
     , quickcheck-instances
+    , template-haskell
+    , text
   ghc-options: -Wall
   default-language: Haskell2010

@@ -1,8 +1,10 @@
 module Data.String.Interpolate.UtilSpec (main, spec) where
 
+import           Prelude ()
+import           Prelude.Compat
+
 import           Test.Hspec
 import           Test.QuickCheck
-import           Control.Applicative
 
 import           Data.String.Interpolate.Util
 

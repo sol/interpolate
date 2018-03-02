@@ -36,3 +36,4 @@ tests:
       - hspec >= 1.5
       - QuickCheck
       - quickcheck-instances
+      - base-compat

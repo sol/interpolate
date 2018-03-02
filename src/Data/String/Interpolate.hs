@@ -40,7 +40,7 @@ import           Data.String.Interpolate.Compat (Q, Exp, appE, reportError)
 -- profession: Marvin the λ-scientist
 i :: QuasiQuoter
 i = QuasiQuoter {
-    quoteExp = toExp . parseNodes
+    quoteExp = toExp . parseNodes . decodeNewlines
   , quotePat = err "pattern"
   , quoteType = err "type"
   , quoteDec = err "declaration"
@@ -62,3 +62,11 @@ i = QuasiQuoter {
             reportError "Parse error in expression!"
             [|""|]
           Right e -> return e
+
+decodeNewlines :: String -> String
+decodeNewlines = go
+  where
+    go xs = case xs of
+      '\r' : '\n' : ys -> '\n' : go ys
+      y : ys -> y : go ys
+      [] -> []
