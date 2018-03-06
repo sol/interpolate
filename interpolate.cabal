@@ -2,10 +2,10 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 6c7365c22776e3daf2887c40126dcf84616d45fa45a9386166f053b556a84fb1
+-- hash: cc8a15b9e3938bac2066e1f8e454e027bd589000a0baf42191f06ceb39e9ce04
 
 name:             interpolate
-version:          0.1.1
+version:          0.2.0
 homepage:         https://github.com/sol/interpolate#readme
 bug-reports:      https://github.com/sol/interpolate/issues
 license:          MIT
