@@ -2,9 +2,6 @@
 module Data.String.Interpolate.Compat (
   readMaybe
 , module Language.Haskell.TH
-#if !MIN_VERSION_template_haskell(2,8,0)
-, reportError
-#endif
 ) where
 
 import           Language.Haskell.TH
@@ -36,9 +33,4 @@ readMaybe :: Read a => String -> Maybe a
 readMaybe s = case readEither s of
                 Left _  -> Nothing
                 Right a -> Just a
-#endif
-
-#if !MIN_VERSION_template_haskell(2,8,0)
-reportError :: String -> Q ()
-reportError = report True
 #endif

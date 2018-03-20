@@ -15,7 +15,7 @@ import           Language.Haskell.Meta.Parse (parseExp)
 
 import           Data.String.Interpolate.Internal.Util
 import           Data.String.Interpolate.Parse
-import           Data.String.Interpolate.Compat (Q, Exp, appE, reportError)
+import           Data.String.Interpolate.Compat (Q, Exp, appE)
 
 -- |
 -- A `QuasiQuoter` for string interpolation.  Expression enclosed within
@@ -59,8 +59,7 @@ i = QuasiQuoter {
         reifyExpression :: String -> Q Exp
         reifyExpression s = case parseExp s of
           Left _ -> do
-            reportError "Parse error in expression!"
-            [|""|]
+            fail "Parse error in expression!" :: Q Exp
           Right e -> return e
 
 decodeNewlines :: String -> String
