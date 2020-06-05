@@ -1,11 +1,11 @@
--- This file has been generated from package.yaml by hpack version 0.26.0.
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.34.2.
 --
 -- see: https://github.com/sol/hpack
---
--- hash: cc8a15b9e3938bac2066e1f8e454e027bd589000a0baf42191f06ceb39e9ce04
 
 name:             interpolate
-version:          0.2.0
+version:          0.2.1
 homepage:         https://github.com/sol/interpolate#readme
 bug-reports:      https://github.com/sol/interpolate/issues
 license:          MIT
@@ -14,7 +14,6 @@ copyright:        (c) 2013-2015 Simon Hengel
 author:           Simon Hengel <sol@typeful.net>
 maintainer:       Simon Hengel <sol@typeful.net>
 build-type:       Simple
-cabal-version:    >= 1.10
 category:         Data, Text
 stability:        experimental
 synopsis:         String interpolation done right
