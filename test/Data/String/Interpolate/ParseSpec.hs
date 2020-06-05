@@ -18,6 +18,9 @@ spec = do
     it "parses string literals" $ do
       parseNodes "foo" `shouldBe` [Literal "foo"]
 
+    it "parses expressions" $ do
+      parseNodes "#{foo}" `shouldBe` [Expression "foo"]
+
     it "parses embedded expressions" $ do
       parseNodes "foo #{bar} baz" `shouldBe` [Literal "foo ", Expression "bar", Literal " baz"]
 

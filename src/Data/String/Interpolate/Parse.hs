@@ -9,12 +9,12 @@ parseNodes = go ""
   where
     go :: String -> String -> [Node]
     go acc input = case input of
-      ""  -> [(lit . reverse) acc]
+      ""  -> lit []
       '\\':x:xs -> go (x:'\\':acc) xs
-      '#':'{':xs -> case span (/= '}') xs of
-        (ys, _:zs) -> (lit . reverse) acc : Expression ys : go "" zs
-        (_, "") -> [lit (reverse acc ++ input)]
+      '#':'{':xs | (ys, '}':zs) <- span (/= '}') xs -> lit $ Expression ys : go "" zs
       x:xs -> go (x:acc) xs
-
-    lit :: String -> Node
-    lit = Literal . unescape
+      where
+        lit :: [Node] -> [Node]
+        lit nodes
+          | null acc = nodes
+          | otherwise = (Literal . unescape $ reverse acc) : nodes
