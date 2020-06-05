@@ -15,7 +15,7 @@ import           Language.Haskell.Meta.Parse (parseExp)
 
 import           Data.String.Interpolate.Internal.Util
 import           Data.String.Interpolate.Parse
-import           Data.String.Interpolate.Compat (Q, Exp, appE)
+import           Language.Haskell.TH
 
 -- |
 -- A `QuasiQuoter` for string interpolation.  Expression enclosed within
@@ -48,19 +48,37 @@ i = QuasiQuoter {
   where
     err name = error ("Data.String.Interpolate.i: This QuasiQuoter can not be used as a " ++ name ++ "!")
 
-    toExp:: [Node] -> Q Exp
-    toExp nodes = case nodes of
-      [] -> [|""|]
-      (x:xs) -> f x `appE` toExp xs
+    toExp :: [Node ()] -> Q Exp
+    toExp input = do
+      nodes <- mapM generateName input
+      e <- go nodes
+      return $ foldr lambda e [name | Abstraction name <- nodes]
       where
-        f (Literal s) = [|showString s|]
-        f (Expression e) = [|(showString . toString) $(reifyExpression e)|]
+        lambda :: Name -> Exp -> Exp
+        lambda name e = LamE [VarP name] e
 
-        reifyExpression :: String -> Q Exp
-        reifyExpression s = case parseExp s of
-          Left _ -> do
-            fail "Parse error in expression!" :: Q Exp
-          Right e -> return e
+        generateName :: Node () -> Q (Node Name)
+        generateName (Abstraction ()) = Abstraction <$> newName "x"
+        generateName (Literal s) = return (Literal s)
+        generateName (Expression e) = return (Expression e)
+
+        go :: [Node Name] -> Q Exp
+        go nodes = case nodes of
+          [] -> [|""|]
+          (x:xs) -> eval x `appE` go xs
+          where
+            eval (Literal s) = [|showString s|]
+            eval (Expression e) = interpolate (reifyExpression e)
+            eval (Abstraction name) = interpolate $ (return $ VarE name)
+
+            interpolate :: Q Exp -> Q Exp
+            interpolate e = [|(showString . toString) $(e)|]
+
+            reifyExpression :: String -> Q Exp
+            reifyExpression s = case parseExp s of
+              Left _ -> do
+                fail "Parse error in expression!" :: Q Exp
+              Right e -> return e
 
 decodeNewlines :: String -> String
 decodeNewlines = go

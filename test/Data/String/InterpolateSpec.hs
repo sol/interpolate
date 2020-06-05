@@ -18,6 +18,9 @@ spec = do
     it "interpolates an expression of type String" $ do
       property $ \xs ys -> [i|foo #{xs ++ ys} bar|] `shouldBe` "foo " ++ xs ++ ys ++ " bar"
 
+    it "interpolates abstractions" $ do
+      [i|foo #{} bar #{} baz|] (23 :: Int) "test" `shouldBe` "foo 23 bar test baz"
+
     it "accepts character escapes" $ do
       [i|foo \955 bar|] `shouldBe` "foo \955 bar"
 

@@ -1,10 +1,8 @@
 {-# LANGUAGE CPP #-}
 module Data.String.Interpolate.Compat (
   readMaybe
-, module Language.Haskell.TH
 ) where
 
-import           Language.Haskell.TH
 import           Text.Read
 
 #if !MIN_VERSION_base(4,6,0)

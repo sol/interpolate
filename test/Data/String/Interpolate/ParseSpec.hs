@@ -6,8 +6,8 @@ import           Test.Hspec
 
 import           Data.String.Interpolate.Parse
 
-deriving instance Eq Node
-deriving instance Show Node
+deriving instance Eq a => Eq (Node a)
+deriving instance Show a => Show (Node a)
 
 main :: IO ()
 main = hspec spec
@@ -17,6 +17,9 @@ spec = do
   describe "parseNodes" $ do
     it "parses string literals" $ do
       parseNodes "foo" `shouldBe` [Literal "foo"]
+
+    it "parses abstractions" $ do
+      parseNodes "#{}" `shouldBe` [Abstraction ()]
 
     it "parses expressions" $ do
       parseNodes "#{foo}" `shouldBe` [Expression "foo"]
